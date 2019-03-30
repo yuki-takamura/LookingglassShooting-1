@@ -22,7 +22,7 @@ public class GlobalRegistory : MonoBehaviour
         
     }
 
-    public void SetSeasons(SeasonFormat player1Season, SeasonFormat player2Season)
+    public static void SetSeasons(SeasonFormat player1Season, SeasonFormat player2Season)
     {
         PlayerSeasons = new SeasonFormat[]{
             player1Season,

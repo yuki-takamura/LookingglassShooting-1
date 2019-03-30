@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Timer : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Timer : MonoBehaviour
     public float CountTime = 60.0f;
     [SerializeField]
     public bool IsEnabled = false;
+
+    public UnityEvent onTimeUp = new UnityEvent();
 
     void Start()
     {
@@ -24,6 +27,7 @@ public class Timer : MonoBehaviour
         {
             TimerStop();
             CountTime = 0;
+            onTimeUp.Invoke();
         }
     }
 
