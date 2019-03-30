@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GlobalRegistory : MonoBehaviour
 {
-    public static Player[] players;
     public static SeasonFormat[] PlayerSeasons;
-    public static TimeSpan RoundTime = TimeSpan.FromSeconds(60.0f);
+
+    public static float RoundTime = 60.0f;
 
     public GlobalRegistory()
     {
@@ -14,7 +14,7 @@ public class GlobalRegistory : MonoBehaviour
 
     void Start()
     {
-        
+        DontDestroyOnLoad(this);
     }
 
     void Update()
@@ -29,5 +29,15 @@ public class GlobalRegistory : MonoBehaviour
             player2Season,
         };
         
+    }
+
+    public static float GetRoundTime()
+    {
+        return RoundTime;
+    }
+
+    public static SeasonFormat[] GetSeasons()
+    {
+        return PlayerSeasons;
     }
 }
