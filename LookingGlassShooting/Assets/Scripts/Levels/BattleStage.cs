@@ -1,4 +1,5 @@
-﻿using LooklingGlassShooting.Models;
+﻿using System;
+using LooklingGlassShooting.Models;
 using UnityEngine;
 using UniRx;
 
@@ -14,6 +15,9 @@ public class BattleStage : MonoBehaviour
     
     void Start()
     {
+        // 仮で夏vs冬
+        GlobalRegistory.SetSeasons(SeasonFormat.Summer,SeasonFormat.Winter);
+
         _timer = GetComponent<Timer>();
         roundTime = GlobalRegistory.GetRoundTime();
         _timer.TimerSet((int)roundTime);
@@ -26,6 +30,16 @@ public class BattleStage : MonoBehaviour
             p1.transform.GetComponent<Player>(),
             p2.transform.GetComponent<Player>()
         };
+        var seasons = GlobalRegistory.GetSeasons();
+        for (int i = 0; i < 2; i++)
+        {
+            Players[i].Season = seasons[i];
+            Players[i].Life = 100;
+        }
+
+        _timer.onTimeUp.AddListener(EventTimeUp);
+        
+        EventReady();
     }
 
     void Update()
@@ -36,9 +50,13 @@ public class BattleStage : MonoBehaviour
     public void EventReady()
     {
         _roundEffect.ShowReady();
+        Observable.Timer(TimeSpan.FromSeconds(3)).Subscribe(_ =>
+        {
+            EventBattleStart();
+        }).AddTo(this);
     }
 
-    public void EventBattleStart()
+    private void EventBattleStart()
     {
         _roundEffect.ShowGo();
         _timer.TimerStart();

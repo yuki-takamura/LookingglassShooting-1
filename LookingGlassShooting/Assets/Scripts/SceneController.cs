@@ -7,10 +7,8 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
 
-    private GlobalRegistory glovalRegistory;
     void Start()
     {
-        glovalRegistory = GetComponent<GlobalRegistory>();
     }
 
     void Update()
@@ -30,7 +28,7 @@ public class SceneController : MonoBehaviour
 
     public void CharactersSelected(SeasonFormat player1Season, SeasonFormat player2Season)
     {
-        glovalRegistory.SetSeasons(player1Season,player2Season);
+        GlobalRegistory.SetSeasons(player1Season,player2Season);
         ShowBattle();
     }
 
