@@ -9,21 +9,22 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
+        ShowCharacterSelect();
     }
-
     void Update()
     {
-        
     }
 
     public void ShowTitle()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("title");
+        Debug.Log("title");  
     }
 
     public void ShowCharacterSelect()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("machineselect");
+        Debug.Log("load");
     }
 
     public void CharactersSelected(SeasonFormat player1Season, SeasonFormat player2Season)
@@ -34,6 +35,6 @@ public class SceneController : MonoBehaviour
 
     private void ShowBattle()
     {
-        SceneManager.LoadScene(2);
+        SceneManager.LoadScene("Battle");
     }
 }
